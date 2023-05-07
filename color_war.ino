@@ -87,6 +87,52 @@ class ADKeyboard
       return val == NONE_VALUE;
     }
 
+    void TopClicked()
+    {
+      // Move to the territory above the currently selected territory
+      Territory* top_territory = GetTerritory(owner->selected_territory->top);
+      if (top_territory != nullptr)
+      {
+        owner->selected_territory = top_territory;
+      }
+    }
+
+    void RightClicked()
+    {
+      // Move to the territory to the right of the currently selected territory
+      Territory* top_territory = GetTerritory(owner->selected_territory->right);
+      if (top_territory != nullptr)
+      {
+        owner->selected_territory = top_territory;
+      }
+    }
+
+    void BottomClicked()
+    {
+      // Move to the territory below the currently selected territory
+      Territory* top_territory = GetTerritory(owner->selected_territory->bottom);
+      if (top_territory != nullptr)
+      {
+        owner->selected_territory = top_territory;
+      }
+    }
+
+    void LeftClicked()
+    {
+      // Move to the territory to the left of the currently selected territory
+      Territory* top_territory = GetTerritory(owner->selected_territory->left);
+      if (top_territory != nullptr)
+      {
+        owner->selected_territory = top_territory;
+      }
+    }
+
+    void EnterClicked()
+    {
+      // TODO: interact with the current territory
+      Serial.println(this->owner->selected_territory->name);
+    }
+
   public:
     ADKeyboard(uint8_t _pin, Player* _owner) : pin(_pin), owner(_owner)
     {
@@ -147,100 +193,6 @@ class ADKeyboard
         // Wait until the keyboard resets, as the read value fluctuates following the release of a button
         allow_read = false;
       }
-    }
-    
-    void TopClicked()
-    {
-      Serial.print("owner id: ");
-      Serial.println(owner->id);
-
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      // Move to the territory above the currently selected territory
-      Territory* top_territory = GetTerritory(owner->selected_territory->top);
-      if (top_territory != NULL)
-      {
-        owner->selected_territory = top_territory;
-      }
-      
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      Serial.println();
-      Serial.println();
-    }
-
-    void RightClicked()
-    {
-      Serial.print("owner id: ");
-      Serial.println(owner->id);
-
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      // Move to the territory to the right of the currently selected territory
-      Territory* top_territory = GetTerritory(owner->selected_territory->right);
-      if (top_territory != NULL)
-      {
-        owner->selected_territory = top_territory;
-      }
-      
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      Serial.println();
-      Serial.println();
-    }
-
-    void BottomClicked()
-    {
-      Serial.print("owner id: ");
-      Serial.println(owner->id);
-
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      // Move to the territory below the currently selected territory
-      Territory* top_territory = GetTerritory(owner->selected_territory->bottom);
-      if (top_territory != NULL)
-      {
-        owner->selected_territory = top_territory;
-      }
-      
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      Serial.println();
-      Serial.println();
-    }
-
-    void LeftClicked()
-    {
-      Serial.print("owner id: ");
-      Serial.println(owner->id);
-
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      // Move to the territory to the left of the currently selected territory
-      Territory* top_territory = GetTerritory(owner->selected_territory->left);
-      if (top_territory != NULL)
-      {
-        owner->selected_territory = top_territory;
-      }
-      
-      Serial.print("currently selected territory: ");
-      Serial.println(owner->selected_territory->name);
-
-      Serial.println();
-      Serial.println();
-    }
-
-    void EnterClicked()
-    {
-      // TODO: interact with the current territory
-      Serial.println("enter");
     }
 };
 
